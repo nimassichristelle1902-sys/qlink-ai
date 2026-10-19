@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Q-Link AI</title>
+
+<style>
+:root {
+    --black: #070711;
+    --blue: #1687ff;
+    --purple: #a855f7;
+    --panel: #111124;
+    --text: #f4f4ff;
+    --muted: #a5a5c5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top, #17103c, transparent 45%),
+        var(--black);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* HEADER */
+
+header {
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid #292447;
+    background: rgba(7, 7, 17, 0.9);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.status {
+    color: #77ffc5;
+    font-size: 12px;
+}
+
+/* MAIN PAGE */
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 25px 16px 40px;
+}
+
+/* SHINING BRAIN */
+
+.welcome {
+    text-align: center;
+    padding: 20px 10px 25px;
+}
+
+.brain {
+    font-size: 75px;
+    display: inline-block;
+    animation: brainGlow 2s infinite alternate,
+               brainFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px #1687ff);
+}
+
+@keyframes brainGlow {
+    from {
+        filter:
+            drop-shadow(0 0 8px #1687ff)
+            drop-shadow(0 0 15px #a855f7);
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 22px #1687ff)
+            drop-shadow(0 0 35px #a855f7);
+    }
+}
+
+@keyframes brainFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-9px); }
+}
+
+.welcome h1 {
+    font-size: clamp(27px, 6vw, 42px);
+    margin: 12px 0;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #1687ff, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.welcome p {
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* ASK ANYTHING */
+
+.ask-box {
+    background: linear-gradient(135deg, #15152c, #101020);
+    border: 1px solid #343064;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 0 30px #39208020;
+}
+
+.ask-box h2 {
+    font-size: 18px;
+    margin: 0 0 12px;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+}
+
+#question {
+    min-width: 0;
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #38365b;
+    background: #090916;
+    color: white;
+    outline: none;
+}
+
+#question:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 12px #1687ff30;
+}
+
+.primary-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 0 20px;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(120deg, #1687ff, #8739ef);
+}
+
+.primary-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 12px 0 0;
+}
+
+/* AI RESPONSE */
+
+#chat {
+    margin-top: 20px;
+}
+
+.message {
+    padding: 16px;
+    border-radius: 13px;
+    margin: 12px 0;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.user {
+    background: #202047;
+    border: 1px solid #41418a;
+}
+
+.bot {
+    background: #111124;
+    border: 1px solid #302b58;
+}
+
+.message-label {
+    display: block;
+    color: #8bbcff;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+/* SERVICES */
+
+.section-title {
+    margin: 38px 0 8px;
+    font-size: 23px;
+}
+
+.section-description {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.service {
+    text-align: left;
+    padding: 19px;
+    border: 1px solid #29264b;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #15152c, #0d0d1b);
+    color: white;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.service:hover {
+    transform: translateY(-3px);
+    border-color: var(--purple);
+}
+
+.service-icon {
+    font-size: 30px;
+}
+
+.service h3 {
+    margin: 12px 0 7px;
+}
+
+.service p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 25px 15px;
+    border-top: 1px solid #24213d;
+    font-size: 12px;
+}
+
+@media (max-width: 500px) {
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+
+    .primary-btn {
+        padding: 14px;
+    }
+
+    .brain {
+        font-size: 65px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brain {
+        animation: none;
+    }
+
+    .service {
+        transition: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Q-Link <span>AI</span></div>
+    <div class="status">● AI ASSISTANT</div>
+</header>
+
+<main>
+
+    <!-- WELCOME AND OPENING BRAIN -->
+
+    <section class="welcome">
+        <div class="brain" aria-label="Shining AI brain">🧠</div>
+
+        <h1>
+            Welcome to <span class="gradient">Q-Link AI</span>
+        </h1>
+
+        <p>
+            One intelligent platform. Unlimited questions.
+            Explore ideas, learn new things, discover opportunities,
+            and get help with everyday challenges.
+        </p>
+    </section>
+
+    <!-- MAIN PURPOSE: ANSWER ANY QUESTION -->
+
+    <section class="ask-box">
+        <h2>💬 Ask Q-Link AI anything</h2>
+
+        <form id="chat-form">
+            <div class="input-row">
+                <input
+                    id="question"
+                    type="text"
+                    placeholder="Ask any question you have..."
+                    aria-label="Your question"
+                    required
+                >
+
+                <button class="primary-btn" id="send" type="submit">
+                    Ask AI →
+                </button>
+            </div>
+        </form>
+
+        <p class="hint">
+            Ask about any subject, idea, problem, or topic.
+        </p>
+    </section>
+
+    <!-- ANSWERS -->
+
+    <section id="chat" aria-live="polite"></section>
+
+    <!-- ADDITIONAL SERVICES -->
+
+    <section>
+        <h2 class="section-title">
+            Explore <span class="gradient">Q-Link Services</span>
+        </h2>
+
+        <p class="section-description">
+            These are additional ways Q-Link AI can help you.
+            Your questions are not limited to these categories.
+        </p>
+
+        <div class="services">
+
+            <button class="service" data-prompt="Help me with my educational questions. Explain difficult concepts step by step and give me practice exercises.">
+                <div class="service-icon">📚</div>
+                <h3>Education</h3>
+                <p>
+                    Understand school subjects, solve exercises,
+                    prepare for exams, and learn new skills.
+                </p>
+            </button>
+
+            <button class="service" data-prompt="Help me with a commercial project. Suggest business ideas, marketing strategies, sales methods, and ways to understand customers.">
+                <div class="service-icon">💼</div>
+                <h3>Business & Commerce</h3>
+                <p>
+                    Explore business ideas, marketing,
+                    entrepreneurship, and commercial strategies.
+                </p>
+            </button>
+
+            <button class="service" data-prompt="Give me useful information about the world, including science, geography, history, technology, and important world events. Distinguish current information from general knowledge.">
+                <div class="service-icon">🌍</div>
+                <h3>World Information</h3>
+                <p>
+                    Discover world knowledge, science, cultures,
+                    technology, and global developments.
+                </p>
+            </button>
+
+            <button class="service" data-prompt="Help me explore job opportunities. Ask about my skills and interests, suggest suitable career paths, and help me prepare a CV and job application. Do not invent current job vacancies.">
+                <div class="service-icon">🚀</div>
+                <h3>Jobs & Opportunities</h3>
+                <p>
+                    Explore career paths, improve your CV,
+                    prepare for interviews, and find opportunities.
+                </p>
+            </button>
+
+            <button class="service" data-prompt="Help me communicate with people respectfully. Suggest conversation starters, explain social situations, and help me improve my communication skills.">
+                <div class="service-icon">🤝</div>
+                <h3>Social Interaction</h3>
+                <p>
+                    Improve communication, develop ideas for
+                    conversations, and understand social situations.
+                </p>
+            </button>
+
+            <button class="service" data-prompt="I want to ask a general question that may not fit into any of your listed services. Help me with my question without restricting it to a category.">
+                <div class="service-icon">✨</div>
+                <h3>Anything Else</h3>
+                <p>
+                    Ask about any other topic. Your curiosity
+                    is the only starting point you need.
+                </p>
+            </button>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Q-Link AI © 2026 · Knowledge, opportunities, and connection.
+</footer>
+
+<script>
+const form = document.getElementById("chat-form");
+const input = document.getElementById("question");
+const chat = document.getElementById("chat");
+const sendButton = document.getElementById("send");
+
+function addMessage(label, text, type) {
+    const box = document.createElement("div");
+    box.className = "message " + type;
+
+    const heading = document.createElement("span");
+    heading.className = "message-label";
+    heading.textContent = label;
+
+    const content = document.createElement("div");
+    content.textContent = text;
+
+    box.appendChild(heading);
+    box.appendChild(content);
+    chat.appendChild(box);
+
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    return content;
+}
+
+async function askAI(question) {
+    addMessage("YOU", question, "user");
+
+    const answerBox = addMessage(
+        "Q-LINK AI",
+        "Thinking...",
+        "bot"
+    );
+
+    input.value = "";
+    sendButton.disabled = true;
+
+    try {
+        const response = await fetch("/.netlify/functions/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ question: question })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "AI request failed.");
+        }
+
+        answerBox.textContent =
+            data.answer || "The AI did not return an answer.";
+
+    } catch (error) {
+        answerBox.textContent =
+            "The AI backend is not connected or could not respond. " +
+            "Please configure the Netlify function and AI provider.";
+
+        console.error(error);
+
+    } finally {
+        sendButton.disabled = false;
+        input.focus();
+    }
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const question = input.value.trim();
+
+    if (question && !sendButton.disabled) {
+        askAI(question);
+    }
+});
+
+document.querySelectorAll(".service").forEach(function(button) {
+    button.addEventListener("click", function() {
+        const prompt = button.dataset.prompt;
+        input.value = prompt;
+        input.focus();
+
+        document.getElementById("question").scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
